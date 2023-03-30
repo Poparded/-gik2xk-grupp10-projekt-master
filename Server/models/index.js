@@ -31,6 +31,27 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+// Establish the relationship between Rating and Product
+db.Rating.belongsTo(db.Product); // a rating belongs to a product
+db.Product.hasMany(db.Rating,
+  { onDelete: "CASCADE" });   // a product can have many ratings
+
+// Establish the relationship between CartRow and Product
+db.CartRow.belongsTo(db.Product); // a cart row belongs to a product
+db.Product.hasMany(db.CartRow, { onDelete: "CASCADE" });   // a product can be in many cart rows
+
+// Establish the relationship between CartRow and Cart
+db.CartRow.belongsTo(db.Cart); // a cart row belongs to a cart
+db.Cart.hasMany(db.CartRow, { onDelete: "CASCADE" });   // a cart can have many rows
+
+// Establish the relationship between Cart and User
+db.Cart.belongsTo(db.User); // a cart belongs to a user
+db.User.hasMany(db.Cart, { allowNull: false, onDelete: "CASCADE" });   // a user can have many carts
+
+
+
+
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

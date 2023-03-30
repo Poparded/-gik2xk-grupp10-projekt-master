@@ -1,10 +1,12 @@
 import './App.css';
-import { Typography, Box, AppBar, Toolbar } from '@mui/material';
+import { Typography, Box, AppBar, Toolbar } from '@mui/material'; // Importing material UI components
+
 import { Routes, Route, Link } from 'react-router-dom';
 import Home from './views/Home';
 import Products from './views/Products';
-import ProductsEdit from './views/ProductsEdit';
-import ProductsDetail from './views/ProductDetail';
+import ProductsEdit from './views/ProductEdit';
+import ProductsDetail from './views/ProductsDetail';
+import UserList from "../components/UserList"
 
 
 function App() {
@@ -27,6 +29,9 @@ function App() {
             <Typography variant="h6" component="div">
               <Link to="/ProductsDetail">Visa produkten</Link>
             </Typography>
+            <Typography variant="h6" component="div">
+              <Link to="/userList">Visa produkten</Link>
+            </Typography>
           </Toolbar>
         </AppBar>
       </Box>
@@ -38,6 +43,8 @@ function App() {
           <Route path="/products" element={<Products></Products>}></Route>
           <Route path="/productsEdit" element={<ProductsEdit></ProductsEdit>}></Route>
           <Route path="/productsDetail" element={<ProductsDetail></ProductsDetail>}></Route>
+          <Route path="/userList" element={<UserList></UserList>}></Route>
+
         </Routes>
       </div>
     </div>

@@ -160,7 +160,10 @@ function _formatProduct(product) {
         updatedAt: product.updatedAt,
         price: product.price,
         imageUrl: product.imageUrl,
-        rating: product.rating
+        rating: product.rating,
+        user_id: product.rating,
+
+
     };
 
     if (product.ratings) {
@@ -181,7 +184,12 @@ function _formatProduct(product) {
     return cleanProduct;
 }
 
+async function _findOrCreateproductId(name) {
+    name = name.toLowerCase().trim();
+    const foundOrCreatedProduct = await db.product.findOrCreate({ where: { id } });
 
+    return foundOrCreatedProduct[0].id;
+}
 
 async function _addProductToCart(cart, products) {
 
