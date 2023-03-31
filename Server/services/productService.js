@@ -93,7 +93,7 @@ async function getProductById(id) {
         return createResponseError(error.status, error.message);
     }
 }*/
-
+// id= product id
 async function addRating(id, rating) {
     if (!id) {
         return createResponseError(422, "Id is obligatory");
@@ -103,11 +103,15 @@ async function addRating(id, rating) {
         await db.rating.create(rating);
 
         const newRating = await db.product.findOne({
-            where: { id }
+            where: { id },
+            include: {
+                model: db.user
+            },
+            include: {
+                model: db.rating,
+                include: [db.user]
+            }
         });
-        newRating.user_id = rating.user_id
-
-        newRating.rating = rating.rating
         return createResponseSuccess(newRating);
     } catch (error) {
         return createResponseError(error.status, error.message);

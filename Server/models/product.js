@@ -26,14 +26,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
 
-      },
-      rating: {
-        type: DataTypes.DOUBLE
-
-      },
-      user_id: {
-        type: DataTypes.DOUBLE
-
       }
     },
     { underscored: true }

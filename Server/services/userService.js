@@ -78,17 +78,52 @@ async function update(user, users_id) {
         return createResponseError(error.status, error.message);
     }
 }
-async function getRatingByUser(userId) {
+async function getRatingByUser(id) {
     try {
-        const review = await db.review.findAll({
-            where: { userId },
+        const rating = await db.rating.findAll({
+            where: { id },
             include: [db.user, db.product],
         });
+        console.log(rating);
+        //_formatUser(rating)
         /* return createResponseSuccess(cart); */
-        return createResponseSuccess(review);
+        return createResponseSuccess(rating);
     } catch (error) {
         return createResponseError(error.status, error.message);
     }
+}
+
+
+
+
+
+function _formatUser(rating) {
+    const cleanUser = {
+        id: rating.id,
+        email: rating.email,
+        password: rating.password,
+        username: rating.username,
+        first_name: user.first_name,
+        last_name: user.last_name,
+    };
+
+
+    if (rating.ratings) {
+        cleanProduct.ratings = [];
+
+        product.ratings.map((rating) => {
+            return (cleanProduct.ratings = [
+                {
+                    id: rating.id,
+                    title: rating.title,
+                    rating: rating.rating,
+                },
+                ...cleanProduct.ratings,
+            ]);
+        });
+    }
+
+    return cleanUser;
 }
 
 module.exports = { getAllusers, addUsers, destroy, update, getRatingByUser };

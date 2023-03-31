@@ -1,25 +1,31 @@
-import ProductList from "../components/ProductList"
-import UserList from "../components/UserList"
-
-import "./Home.css"
-import { Grid, Box, Typography } from "@mui/material"
+import React from "react";
+import { Grid, Box, Typography } from "@mui/material";
+import "./Home.css";
 
 function Home() {
     return (
-        <Grid container columnSpacing={2} className="Home">
-            <Grid className="Home_grid-item" item xs={12} md={8}>
-                <Typography variant="h4" component="h2">Alla products</Typography>
-                <ProductList />
+        <Grid container spacing={2} className="home-container">
+            <Grid item xs={12}>
+                <Box mt={3}>
+                    <Typography variant="h4" component="h1" align="center">
+                        För dig som älskar att vandra!
+                    </Typography>
+                </Box>
             </Grid>
-            <Grid className="Home_grid-item" item xs={12} md={4}>
-                <Box className="Home_grid-item">
-                    <Typography variant="h4" component="h2">Alla products</Typography>
-
-                    <UserList />
+            <Grid item xs={12}>
+                <Box mt={3}>
+                    <img src="/stockImages/tent.png" alt="Tent" />
+                </Box>
+            </Grid>
+            <Grid item xs={12}>
+                <Box mt={3}>
+                    <Typography variant="body1" component="p" align="center">
+                        här kan vi länka till produkter.
+                    </Typography>
                 </Box>
             </Grid>
         </Grid>
-      
+    );
 }
 
 export default Home;

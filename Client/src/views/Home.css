@@ -1,3 +1,11 @@
 .Home_grid-item {
   border: 1px solid black;
+  padding: 3px;
+  background-color: rgb(77, 255, 0);
+}
+.home-container {
+  text-decoration: wavy;
+  padding: 10px;
+  color: aqua;
+  background-color: black;
 }
