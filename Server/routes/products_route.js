@@ -12,6 +12,7 @@ router.get("/", (req, res) => {
     res.status(500).json(error);
   });
 });
+
 router.get("/:id", (req, res) => {
   id = req.params.id
 
@@ -22,7 +23,7 @@ router.get("/:id", (req, res) => {
   })
 })
 // Product request to create a new post
-router.post('/', (req, res) => {
+router.post('/new', (req, res) => {
   const product = req.body; // Get post data from the request body
 
   productService.addProduct(product).then((result) => { // Call postService.create method with post as parameter
@@ -89,19 +90,6 @@ router.put("/", (req, res) => {
   productService.update(produkt, id).then((result) => {
     res.status(result.status).json(result.data)
   })
-});
-router.delete("/:id", (req, res) => {
-  db.produkt
-    .destroy({
-      where: { id: req.params.id },
-    })
-    .then(() => {
-      res.json(`Produkten med ID ${req.params.id} raderades`);
-    })
-    //kolla om det fanns någon error
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
 });
 
 module.exports = router;

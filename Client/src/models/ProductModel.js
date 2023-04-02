@@ -1,4 +1,4 @@
-import api from "../api.js"
+import api from "../api"
 export async function getAllProducts(url = "/products") {
     const result = await api.get(url)
 
@@ -37,7 +37,7 @@ export async function update(product) {
 }
 
 export async function create(product) {
-    const result = await api.post('/posts/', product);
+    const result = await api.post('/products/new', product);
 
     if (result.status === 200) return result.data;
     else {
