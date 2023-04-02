@@ -1,5 +1,5 @@
 import api from "../api.js"
-export async function getAll(url = "/users") {
+export async function getAllUsers(url = "/users") {
     const result = await api.get(url);
     if (result.status === 200) return result.data
     else {

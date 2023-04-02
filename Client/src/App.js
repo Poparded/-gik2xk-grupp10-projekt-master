@@ -5,6 +5,7 @@ import Home from './views/Home';
 import Products from './views/Products';
 import ProductsEdit from './views/ProductEdit';
 import ProductsDetail from './views/ProductsDetail';
+import Users from './views/Users';
 
 function App() {
   return (
@@ -19,13 +20,10 @@ function App() {
               <Link to="/products" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Alla Produkten</Link>
             </Typography>
             <Typography variant="h6" component="div">
-              <Link to="/productsEdit" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Lägg till i varukorgen</Link>
+              <Link to="/productsEdit" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Skapa produkt</Link>
             </Typography>
             <Typography variant="h6" component="div">
-              <Link to="/productsDetail" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Visa produkten</Link>
-            </Typography>
-            <Typography variant="h6" component="div">
-              <Link to="/userList" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Användare</Link>
+              <Link to="/userList" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Visa alla användare</Link>
             </Typography>
           </Toolbar>
         </AppBar>
@@ -37,6 +35,8 @@ function App() {
           <Route path="/products" element={<Products></Products>}></Route>
           <Route path="/productsEdit" element={<ProductsEdit></ProductsEdit>}></Route>
           <Route path="/productsDetail" element={<ProductsDetail></ProductsDetail>}></Route>
+          <Route path="/userList" element={<Users></Users>}></Route>
+
         </Routes>
       </div>
     </div>

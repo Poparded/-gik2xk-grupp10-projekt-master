@@ -1,13 +1,27 @@
-import { Typography } from "@mui/material";
+import { useEffect, useState } from 'react';
+import { getAllUsers } from "../models/UserModel"
+import UserSmall from "./UserSmall"
+function UserList({ pathname }) {
 
-function UserList({ user }) {
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        getAllUsers(pathname).then((users) => setUsers(users));
+    }, [pathname]);
+
+
     return (
-        <>
-            <Typography>
-                {user.firstName} {user.lastName}
-            </Typography>
-            <Typography>{user.email}</Typography>
-        </>
+        <ul>
+
+            {users &&
+                users.map((product) => {
+                    return (
+                        <li key={`productId_${users.id}`} >
+                            <UserSmall product={users} />
+                        </li>
+                    );
+                })}
+        </ul>
     );
 }
 

@@ -1,18 +1,17 @@
 import api from "../api"
-export async function getAllProducts(url = "/products") {
-    const result = await api.get(url)
+export async function getAllProducts(url = '/products') {
 
+    const result = await api.get(url);
+    console.log(result);
 
     if (result.status === 200) return result.data;
+
     else {
         console.log(result.status);
         console.log(result.data);
-        return {};
-
+        return [];
     }
 }
-
-
 
 export async function getOne(id) {
     const result = await api.get(`/products/${id}`);
