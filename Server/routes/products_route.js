@@ -56,10 +56,12 @@ router.delete('/', (req, res) => {
 router.get("/rating/:id", (req, res) => {
   // Get the ID parameter from the request URL
   const id = req.params.id;
+  console.log("Getting rating");
 
   // Call a method to get the review by ID from a product service
   productService.getRatingByProduct(id).then((result) => {
     // Send the response with the status code and data from the product service
+    console.log(result);
     res.status(result.status).json(result.data);
   });
 });

@@ -1,6 +1,6 @@
 //Skapa och bygga upp kundvagn
 
-var cartList = [];
+/*var cartList = [];
 
 for (var i = 0; i < cart.length; i++) {
     for (var j = 0; j < products.length; j++) {
@@ -55,4 +55,4 @@ return (
 );
 }
 
-export default CartList;
+export default CartList;*/

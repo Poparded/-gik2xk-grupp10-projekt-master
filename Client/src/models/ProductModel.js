@@ -24,6 +24,16 @@ export async function getOne(id) {
     }
 }
 
+export async function getOneWithRating(id) {
+    const result = await api.get(`/products/rating/${id}`);
+    console.log(result.data);
+    if (result.status === 200) return result.data;
+    else {
+        console.log(result.status);
+        console.log(result.data);
+        return {};
+    }
+}
 export async function update(product) {
     const result = await api.put('/posts/', product);
 

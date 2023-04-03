@@ -3,33 +3,34 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import ProductLarge from '../components/productLarge';
-import { addRating, getOne } from '../models/ProductModel';
+import { addRating, getOneWithRating } from '../models/ProductModel';
+
 function ProductsDetail() {
     const params = useParams();
     const ProductId = params.id;
     const [product, setProduct] = useState({});
 
     useEffect(() => {
-        getOne(ProductId).then((product) => setProduct(product));
+        getOneWithRating(ProductId).then((product) => setProduct(product));
     }, [ProductId]);
-
-
+    console.log(product);
     return (
         <>
             <ProductLarge product={product} />
             <div>
-                {product.rating &&
-                    product.rating.map((rating) => (
-                        <p key={`ProductId${product.id}`}>
-                            {rating.title}
-                            <br /> {rating.rating}
-                        </p>
+                {product.ratings &&
+                    product.ratings.map((rating) => (
+                        <li key={`rating-${rating.id}`}>
+                            <div>{`rating ${rating.title}`}</div>
+
+                            <div>{`rating ${rating.rating}`}</div>
+                            <div> {`rating${rating.rating}`}</div>
+                        </li>
                     ))}
             </div>
-            <Link to={`/posts/${ProductId}/edit`}>
-                <Button variant="filled">Ändra</Button>
+            <Link to={`/product/${ProductId}/edit`}>
+                <Button variant="contained">Ändra</Button>
             </Link>
-
         </>
     );
 }
