@@ -1,10 +1,15 @@
 import api from "../api.js"
 export async function getAllUsers(url = "/users") {
+    console.log("hey");
+
     const result = await api.get(url);
+    console.log(result.data);
     if (result.status === 200) return result.data
     else {
         console.log(result.status);
         console.log(result.data);
+        return [];
+
     }
 }
 

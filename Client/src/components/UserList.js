@@ -1,28 +1,36 @@
 import { useEffect, useState } from 'react';
 import { getAllUsers } from "../models/UserModel"
 import UserSmall from "./UserSmall"
-function UserList({ pathname }) {
-
-    const [users, setUsers] = useState([]);
-
-    useEffect(() => {
-        getAllUsers(pathname).then((users) => setUsers(users));
-    }, [pathname]);
 
 
-    return (
-        <ul>
+function UserList() {
+  const [users, setUsers] = useState([]);
 
-            {users &&
-                users.map((product) => {
-                    return (
-                        <li key={`productId_${users.id}`} >
-                            <UserSmall product={users} />
-                        </li>
-                    );
-                })}
-        </ul>
-    );
+
+  useEffect(() => {
+    getAllUsers().then((users) => setUsers(users));
+  }, []);
+
+
+  console.log(users);
+
+
+  /*useEffect(() => {
+    getAll().then((users) => setUsers(users));
+  }, []);*/
+  /*return (
+    <ul>
+      {users &&
+        users.map((user) => {
+          return (
+            <li key={`user_${user.id}`}>
+              <UserSmall style={{ marginBottom: '1rem' }} user={user} />
+            </li>
+ 
+          );
+        })}
+    </ul>
+  );*/
 }
 
 export default UserList;

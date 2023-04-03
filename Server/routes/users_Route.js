@@ -16,6 +16,7 @@ const { JSON } = require('sequelize');
 // Define a route handler for GET requests to the root path
 router.get('/', (req, res) => {
   // Call a method to get all users from the user service
+  console.log("Getting users");
   userService.getAllusers().then((result) => {
     // Send the response with the status code and data from the user service
     res.status(result.status).json(result.data);
