@@ -1,4 +1,4 @@
-import api from "../api"
+import api from "../api.js"
 export async function getAllProducts(url = '/products') {
 
     const result = await api.get(url);

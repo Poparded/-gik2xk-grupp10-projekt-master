@@ -1,14 +1,15 @@
-function ProductItemSmall(product) {
+import { Typography } from "@mui/material";
+import { Link } from 'react-router-dom';
+
+function ProductItemSmall({ product }) {
+    console.log(product);
     return (
-
         <>
-            <img alt={product.title} height="50" width="50" src={product.imageUrl} />
-
-
-            <h2> {product.title}</h2>
-            <p>{product.description}</p>
-
-            <p> {product.price} </p>
+            <img alt={product.title} height="400" width="400" src={product.imageUrl} />
+            <Typography sx={{ fontFamily: "sans-serif" }}>  <Link to={`/products/${product.id}`}>{product.title}</Link>
+            </Typography>
+            <Typography variant="body1" sx={{ fontFamily: "sans-serif" }}>{product.description}</Typography>
+            <Typography variant="subtitle1" sx={{ fontFamily: "sans-serif" }}>{`Pris: ${product.price}`}</Typography>
         </>
     );
 }

@@ -70,6 +70,26 @@ async function getProductById(id) {
         return createResponseError(error.status, error.message);
     }
 }
+
+async function getRatingByProduct(id) {
+    try {
+        const productWithRatings = await db.product.findOne({
+            where: { id },
+
+            include: {
+                model: db.rating
+            }
+        });
+        console.log(productWithRatings);
+        //_formatUser(rating)
+        /* return createResponseSuccess(cart); */
+        return createResponseSuccess(productWithRatings);
+    } catch (error) {
+        return createResponseError(error.status, error.message);
+    }
+}
+
+
 /*async function addRating(id, rating) {
     if (!id) {
         return createResponseError(422, "Id is required");
@@ -109,7 +129,6 @@ async function addRating(id, rating) {
             },
             include: {
                 model: db.rating,
-                include: [db.user]
             }
         });
         return createResponseSuccess(newRating);
@@ -206,4 +225,4 @@ async function _addProductToCart(cart, products) {
         });
     }
 }
-module.exports = { destroy, getAll, getAll, update, addRating, addProduct, getProductById };
+module.exports = { destroy, getAll, getAll, update, addRating, addProduct, getProductById, getRatingByProduct };

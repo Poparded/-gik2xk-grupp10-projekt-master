@@ -1,12 +1,13 @@
 import { Typography } from "@mui/material";
 
-function UserList({ users }) {
+function UserList({ user }) {
+    console.log(user);
     return (
         <>
             <Typography>
-                {users.firstName} {users.lastName}
+                {user.first_name} {user.last_name}
             </Typography>
-            <Typography>{users.email}</Typography>
+            <Typography>{user.email}</Typography>
         </>
     );
 }
