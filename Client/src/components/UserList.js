@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAllUsers } from "../models/UserModel"
+import { getAllUsers, getRatingByUser } from "../models/UserModel"
 import UserSmall from "./UserSmall"
 
 
@@ -11,7 +11,7 @@ function UserList() {
     getAllUsers().then((users) => setUsers(users));
   }, []);
 
-  console.log(users);
+
 
 
 

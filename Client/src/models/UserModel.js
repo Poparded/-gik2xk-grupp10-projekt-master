@@ -34,9 +34,9 @@ export async function updateUser() {
         return [];
     }
 }
-export async function getRatingByUser() {
-    const result = await api.put('/users');
-
+export async function getRatingByUser(id) {
+    const result = await api.get(`/users/rating/${id}`);
+    console.log(result.data);
     if (result.status === 200) return result.data;
     else {
         console.log(result.status);

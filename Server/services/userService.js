@@ -78,10 +78,10 @@ async function update(user, users_id) {
         return createResponseError(error.status, error.message);
     }
 }
-async function getRatingByUser(id) {
+async function getRatingByUser(userId) {
     try {
         const rating = await db.rating.findAll({
-            where: { id },
+            where: { userId },
             include: [db.user, db.product],
         });
         console.log(rating);
