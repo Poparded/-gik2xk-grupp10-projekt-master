@@ -1,7 +1,7 @@
 .Home_grid-item {
   border: 1px solid black;
   padding: 3px;
-  background-color: rgb(0, 255, 242);
+  background-color: hsl(177, 100%, 50%);
 }
 .home-container {
   text-decoration: wavy;
