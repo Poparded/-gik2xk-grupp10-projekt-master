@@ -41,7 +41,7 @@ function productLarge({ product }, { rating }) {
             </li>
         </ul>
         <Typography variant="h5" component="h3">
-            {<Link to={`/productEdit/${product.id}`}> {"Edit product"} </Link>}
+            {<Link to={`/productsEdit/${product.id}`}> {"Edit product"} </Link>}
         </Typography>
     </>)
 }

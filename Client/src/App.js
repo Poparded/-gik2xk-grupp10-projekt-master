@@ -3,7 +3,7 @@ import { Typography, Box, AppBar, Toolbar } from '@mui/material';
 import { Routes, Route, Link } from 'react-router-dom';
 import Home from './views/Home';
 import Products from './views/Products';
-import ProductsEdit from './views/ProductEdit';
+import ProductsEdit from './views/ProductsEdit';
 import ProductsDetail from './views/ProductsDetail';
 import Users from './views/Users';
 import UserRating from "./views/UserRating"
@@ -33,7 +33,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
           <Route path="/products" element={<Products></Products>}></Route>
-          <Route path="/productsEdit" element={<ProductsEdit></ProductsEdit>}></Route>
+          <Route path="/productsEdit/:id" element={<ProductsEdit></ProductsEdit>}></Route>
           <Route path="/products/rating/:id" element={<ProductsDetail></ProductsDetail>}></Route>
           <Route path="/userList" element={<Users></Users>}></Route>
           <Route path="/users/rating/:id" element={<UserRating></UserRating>}></Route>

@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, Box, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { UserRatingSmall } from '../components/UserRatingSmall';
@@ -16,16 +16,17 @@ function UserRating() {
     console.log(ratings)
 
     return (
-        <>
-            <div>
-                {ratings.map((rating) => (
-                    <li key={`rating-${rating.id}`}>
-                        <UserRatingSmall rating={rating} />
-
-                    </li>
-                ))}
-            </div>
-        </>
+        <Grid container justifyContent="center">
+            <Grid item xs={12} sm={10} md={8}>
+                <Box mt={2}>
+                    {ratings.map((rating) => (
+                        <li key={`rating-${rating.id}`}>
+                            <UserRatingSmall rating={rating} />
+                        </li>
+                    ))}
+                </Box>
+            </Grid>
+        </Grid>
     );
 }
 

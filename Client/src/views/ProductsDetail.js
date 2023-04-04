@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, Grid, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
@@ -18,15 +18,23 @@ function ProductsDetail() {
         <>
             <ProductLarge product={product} />
             <div>
-                {product.ratings &&
-                    product.ratings.map((rating) => (
-                        <li key={`rating-${rating.id}`}>
-                            <div>{`rating ${rating.title}`}</div>
+                <Grid container justifyContent="center">
+                    <Grid item xs={12} sm={10} md={8}>
+                        <Box mt={2}>
+                            {product.ratings &&
+                                product.ratings.map((rating) => (
+                                    <li key={`rating-${rating.id}`}>
+                                        <div>{`rating ${rating.title}`}</div>
 
-                            <div>{`rating ${rating.rating}`}</div>
-                            <div> {`rating${rating.rating}`}</div>
-                        </li>
-                    ))}
+                                        <div>{`rating ${rating.rating}`}</div>
+                                        <div> {`rating${rating.rating}`}</div>
+                                    </li>
+                                ))}
+
+                        </Box>
+                    </Grid>
+                </Grid>
+
             </div>
             <Link to={`/product/${ProductId}/edit`}>
                 <Button variant="contained">Ändra</Button>
