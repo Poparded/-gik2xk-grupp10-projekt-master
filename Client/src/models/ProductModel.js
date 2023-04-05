@@ -35,7 +35,7 @@ export async function getOneWithRating(id) {
     }
 }
 export async function update(product) {
-    const result = await api.put('/posts/', product);
+    const result = await api.put('/products/', product);
 
     if (result.status === 200) return result.data;
     else {
@@ -58,7 +58,8 @@ export async function create(product) {
 }
 
 export async function remove(id) {
-    const result = await api.delete('/products/', { data: { id } });
+    console.log(id);
+    const result = await api.delete('/products', { data: { id } });
 
     if (result.status === 200) return result.data;
     else {

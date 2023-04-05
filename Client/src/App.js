@@ -5,6 +5,8 @@ import Home from './views/Home';
 import Products from './views/Products';
 import ProductsEdit from './views/ProductsEdit';
 import ProductsDetail from './views/ProductsDetail';
+import ProductCreate from './views/ProductCreate';
+
 import Users from './views/Users';
 import UserRating from "./views/UserRating"
 function App() {
@@ -20,7 +22,7 @@ function App() {
               <Link to="/products" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Alla Produkten</Link>
             </Typography>
             <Typography variant="h6" component="div">
-              <Link to="/productsEdit" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Skapa produkt</Link>
+              <Link to="/productCreate" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Skapa produkt</Link>
             </Typography>
             <Typography variant="h6" component="div">
               <Link to="/userList" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Visa alla användare</Link>
@@ -34,6 +36,8 @@ function App() {
           <Route path="/" element={<Home></Home>}></Route>
           <Route path="/products" element={<Products></Products>}></Route>
           <Route path="/productsEdit/:id" element={<ProductsEdit></ProductsEdit>}></Route>
+          <Route path="/productCreate" element={<ProductCreate></ProductCreate>}></Route>
+
           <Route path="/products/rating/:id" element={<ProductsDetail></ProductsDetail>}></Route>
           <Route path="/userList" element={<Users></Users>}></Route>
           <Route path="/users/rating/:id" element={<UserRating></UserRating>}></Route>

@@ -19,23 +19,25 @@ function ProductEdit() {
         title: "",
         description: "",
         price: 0,
-        productImg: "",
-        units: 0
+        imageUrl: "",
+        amount: 0
     };
     const [product, setProduct] = useState(emptyProduct);
 
     useEffect(() => {
         getOne(productId).then(setProduct);
     }, [productId]);
+    console.log(product);
+    function onDelete() {
+        console.log(product.id);
+        remove(product.id).then(() => navigate('/products', { state: { message: "product removed" } }));
+    }
 
     function onSave() {
         const method = product.id === 0 ? create : update;
         method(product).then(() => setAlertOpen(true));
     }
 
-    function onDelete() {
-        remove(product).then(() => navigate('/products', { state: { message: "product removed" } }));
-    }
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -71,16 +73,16 @@ function ProductEdit() {
                 onChange={handleChange}
             />
             <TextField
-                name="productImg"
+                name="imageUrl"
                 label="Product Image URL"
-                value={product.productImg}
+                value={product.imageUrl}
                 fullWidth
                 onChange={handleChange}
             />
             <TextField
-                name="units"
-                label="Units"
-                value={product.units}
+                name="amount"
+                label="amount"
+                value={product.amount}
                 fullWidth
                 onChange={handleChange}
             />

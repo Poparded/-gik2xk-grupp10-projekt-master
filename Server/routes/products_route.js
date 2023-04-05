@@ -25,7 +25,7 @@ router.get("/:id", (req, res) => {
 // Product request to create a new post
 router.post('/new', (req, res) => {
   const product = req.body; // Get post data from the request body
-
+  console.log(product);
   productService.addProduct(product).then((result) => { // Call postService.create method with post as parameter
     res.status(result.status).json(result.data); // Send the response with the status and data received from postService.create
   });
@@ -43,11 +43,10 @@ router.post('/:id/addRating', (req, res) => {
 
 
 router.delete('/', (req, res) => {
-  const id = req.body.id; // Get the id from the request body
-  if (!id) {
-    console.log("You need a id!");
 
-  }
+  const id = req.body.id
+  console.log("deleting product");
+  console.log(req);
   productService.destroy(id).then((result) => { // Call postService.destroy method with id as parameter
     res.status(result.status).json(result.data); // Send the response with the status and data received from postService.destroy
   });

@@ -2,7 +2,6 @@ import { Typography } from "@mui/material";
 import { Link } from 'react-router-dom';
 
 function ProductItemSmall({ product }) {
-    console.log(product);
     return (
         <>
             <img alt={product.title} height="400" width="400" src={product.imageUrl} />

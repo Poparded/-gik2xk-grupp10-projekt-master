@@ -5,7 +5,6 @@ import TextField from "@mui/material/TextField";
 
 function productLarge({ product }, { rating }) {
 
-    console.log(rating);
     return (<>
         <ul>
             <li key={`productId_${product.id}`}>

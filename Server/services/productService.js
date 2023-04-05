@@ -143,7 +143,13 @@ async function destroy(id) {
     if (!id) return createResponseError(422, "Id is required");
 
     try {
+        await db.rating.destroy({
+            where: {
+                product_id: id
+            }
+        })
         await db.product.destroy({ where: { id } });
+
         return createResponseMessage(200, "Product deleted");
     } catch (error) {
         return createResponseError(error.status, error.message);
@@ -185,7 +191,9 @@ function _formatProduct(product) {
         imageUrl: product.imageUrl,
         rating: product.rating,
         user_id: product.rating,
-
+        amount: product.rating,
+        imageUrl: product.imageUrl,
+        amount: product.rating
 
     };
 
