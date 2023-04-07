@@ -6,7 +6,9 @@ const validate = require("validate.js");
 
 
 router.get("/", (req, res) => {
+  console.log("Getting products");
   productService.getAll().then((result) => {
+    console.log(result);
     res.status(result.status).json(result.data);
   }).catch((error) => {
     res.status(500).json(error);
