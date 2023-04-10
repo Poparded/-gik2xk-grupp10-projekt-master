@@ -71,15 +71,20 @@ export async function remove(id) {
 
 
 export async function addRating(id, rating) {
-    const result = await api.post(`/posts/${id}/addRating`, rating);
+    console.log(id);
+    console.log(rating);
+    const productId = id.ProductId;
+    const result = await api.post(`/products/${productId}/addRating`, rating);
 
-    if (result.status === 200) return result.data;
-    else {
+    if (result.status === 200) {
+        return result.data;
+    } else {
         console.log(result.status);
         console.log(result.data);
         return {};
     }
 }
+
 
 
 

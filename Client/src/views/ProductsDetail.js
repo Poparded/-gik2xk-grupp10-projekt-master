@@ -4,19 +4,20 @@ import { Link, useParams } from 'react-router-dom';
 
 import ProductLarge from '../components/productLarge';
 import DisplayRating from '../components/DisplayRating';
-import ratingForm from "../components/RatingForm"
-import { addRating, getOneWithRating } from '../models/ProductModel';
-import RatingForm from '../components/RatingForm';
+import { getOneWithRating } from '../models/ProductModel';
+import RatingForm from "../components/RatingForm";
 
 function ProductsDetail() {
     const params = useParams();
     const ProductId = params.id;
     const [product, setProduct] = useState({});
+    console.log(ProductId);
 
     useEffect(() => {
         getOneWithRating(ProductId).then((product) => setProduct(product));
     }, [ProductId]);
     console.log(product);
+    console.log(ProductId);
     return (
         <>
             <ProductLarge product={product} />
@@ -35,7 +36,8 @@ function ProductsDetail() {
                 </Grid>
 
             </div>
-            <RatingForm product={product} />
+
+            <RatingForm ProductId={ProductId} />
             <Link to={`/product/${ProductId}/edit`}>
                 <Button variant="contained">Ändra</Button>
             </Link>

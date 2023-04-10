@@ -3,26 +3,26 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { addRating } from "../models/ProductModel";
 
-function RatingForm({ product }) {
+function RatingForm(product_id) {
+    console.log(product_id);
     const navigate = useNavigate();
-    console.log(product);
 
     const [alertOpen, setAlertOpen] = useState(false);
     const [newRating, setNewRating] = useState({
         title: "",
         rating: 0,
-        user_id: product.rating.user_id,
-        product_id: product.rating.user_id
+        product_id: product_id,
+        user_id: 0
 
 
     });
 
     useEffect(() => {
-        setNewRating(product);
-    }, [product]);
-
+        setNewRating(product_id);
+    }, [product_id]);
+    console.log(newRating);
     function onSave() {
-        addRating(newRating).then(() => {
+        addRating(product_id, newRating).then(() => {
             setAlertOpen(true);
             navigate("/products", { state: { message: "rating added" } });
         });
@@ -51,6 +51,16 @@ function RatingForm({ product }) {
                 label="Rating"
                 value={newRating.rating}
                 fullWidth
+                onChange={handleRatingChange}
+            />
+            <TextField
+                fullWidth
+                name="user_id "
+                id="user_id"
+                label="user_id "
+                variant="standard"
+                margin="normal"
+                value={newRating.user_id}
                 onChange={handleRatingChange}
             />
 

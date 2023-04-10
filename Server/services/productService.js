@@ -115,11 +115,13 @@ async function getRatingByProduct(id) {
 }*/
 // id= product id
 async function addRating(id, rating) {
+    console.log(id);
+    console.log(rating);
     if (!id) {
         return createResponseError(422, "Id is obligatory");
     }
     try {
-        rating.productId = id;
+
         await db.rating.create(rating);
 
         const newRating = await db.product.findOne({
