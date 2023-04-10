@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import ProductLarge from '../components/productLarge';
+import DisplayRating from '../components/DisplayRating';
+import ratingForm from "../components/RatingForm"
 import { addRating, getOneWithRating } from '../models/ProductModel';
+import RatingForm from '../components/RatingForm';
 
 function ProductsDetail() {
     const params = useParams();
@@ -23,12 +26,8 @@ function ProductsDetail() {
                         <Box mt={2}>
                             {product.ratings &&
                                 product.ratings.map((rating) => (
-                                    <li key={`rating-${rating.id}`}>
-                                        <div>{`rating ${rating.title}`}</div>
+                                    <DisplayRating rating={rating} />
 
-                                        <div>{`rating ${rating.rating}`}</div>
-                                        <div> {`rating${rating.rating}`}</div>
-                                    </li>
                                 ))}
 
                         </Box>
@@ -36,6 +35,7 @@ function ProductsDetail() {
                 </Grid>
 
             </div>
+            <RatingForm product={product} />
             <Link to={`/product/${ProductId}/edit`}>
                 <Button variant="contained">Ändra</Button>
             </Link>

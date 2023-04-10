@@ -40,6 +40,11 @@ async function getAllusers() {
 
 async function addUsers(user) {
     try {
+
+        const invalidData = validate(user, constraints_user);
+        if (invalidData) {
+            return createResponseError(422, invalidData);
+        }
         console.log(user);
         const NewUser = await db.user.create(user);
         console.log(NewUser);
