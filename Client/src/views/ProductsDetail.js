@@ -1,4 +1,4 @@
-import { Button, Grid, Box } from '@mui/material';
+import { Button, Grid, Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
@@ -9,15 +9,23 @@ import RatingForm from "../components/RatingForm";
 
 function ProductsDetail() {
     const params = useParams();
-    const ProductId = params.id;
+    const productId = params.id;
     const [product, setProduct] = useState({});
-    console.log(ProductId);
+    console.log(productId);
 
     useEffect(() => {
-        getOneWithRating(ProductId).then((product) => setProduct(product));
-    }, [ProductId]);
+        getOneWithRating(productId).then((product) => setProduct(product));
+    }, [productId]);
+
     console.log(product);
-    console.log(ProductId);
+
+    const ratings = product.ratings || [];
+    const total = ratings.reduce((acc, rating) => acc + rating.rating, 0);
+
+    console.log(total);
+
+    const averageRating = ratings.length > 0 ? total / ratings.length : 0;
+
     return (
         <>
             <ProductLarge product={product} />
@@ -25,22 +33,24 @@ function ProductsDetail() {
                 <Grid container justifyContent="center">
                     <Grid item xs={12} sm={10} md={8}>
                         <Box mt={2}>
-                            {product.ratings &&
-                                product.ratings.map((rating) => (
-                                    <DisplayRating rating={rating} />
-
-                                ))}
-
+                            {ratings.map((rating) => (
+                                <DisplayRating key={rating.id} rating={rating} />
+                            ))}
                         </Box>
+                        {averageRating > 0 && (
+                            <Box>
+                                <Typography>{averageRating.toFixed(1)}</Typography>
+                            </Box>
+                        )}
+
                     </Grid>
                 </Grid>
-
             </div>
-
-            <RatingForm ProductId={ProductId} />
-            <Link to={`/product/${ProductId}/edit`}>
+            <RatingForm productId={productId} />
+            <Link to={`/product/${productId}/edit`}>
                 <Button variant="contained">Ändra</Button>
             </Link>
+
         </>
     );
 }

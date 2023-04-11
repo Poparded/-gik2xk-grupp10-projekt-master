@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 
 function DisplayRating({ rating }) {
-    console.log(rating);
+
+
     return (<>
         <ul>
             <li key={`productId_${rating.id}`}>

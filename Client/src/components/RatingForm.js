@@ -12,10 +12,9 @@ function RatingForm(product_id) {
         title: "",
         rating: 0,
         product_id: product_id,
-        user_id: 0
-
-
+        userId: 0
     });
+
 
     useEffect(() => {
         setNewRating(product_id);
@@ -55,12 +54,9 @@ function RatingForm(product_id) {
             />
             <TextField
                 fullWidth
-                name="user_id "
-                id="user_id"
-                label="user_id "
-                variant="standard"
-                margin="normal"
-                value={newRating.user_id}
+                name="userId"
+                label="userId"
+                value={newRating.userId}
                 onChange={handleRatingChange}
             />
 
