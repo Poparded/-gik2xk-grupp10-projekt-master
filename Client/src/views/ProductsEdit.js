@@ -35,7 +35,7 @@ function ProductEdit() {
 
     function onSave() {
         const method = product.id === 0 ? create : update;
-        method(product).then(() => setAlertOpen(true));
+        method(product).then(() => setAlertOpen(true), );
     }
 
 

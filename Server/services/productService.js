@@ -90,30 +90,10 @@ async function getRatingByProduct(id) {
 }
 
 
-/*async function addRating(id, rating) {
-    if (!id) {
-        return createResponseError(422, "Id is required");
-    }
-    try {
-        const productId = id;
-        await db.rating.create(rating);
-        console.log(rating);
-        const productWithRating = await db.product.findOne({
-            where: { id: productId },
-            include: [{
-                model: db.rating,
-                as: 'ratings' // the alias for the relationship in your model definition
-            }]
-        });
-        console.log(productWithRating);
-        productWithRating.rating = rating.rating
-        // Add the newly created rating to the productWithRating object
-        return createResponseSuccess(_formatProduct(productWithRating));
-    } catch (error) {
-        return createResponseError(error.status, error.message);
-    }
-}*/
-// id= product id
+
+
+
+
 async function addRating(id, rating) {
     console.log(id);
     console.log(rating);
