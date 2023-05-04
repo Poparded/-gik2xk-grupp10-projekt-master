@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 
 function productLarge({ product }, { rating }) {
-
     return (<>
         <ul>
             <li key={`productId_${product.id}`}>
@@ -24,9 +23,12 @@ function productLarge({ product }, { rating }) {
                     <Typography> {product.description}</Typography>
                     <br />
                     <Typography variant="h5" component="h3">
-                        Price: {product.price}kr
+                        Pris: {product.price}kr
                     </Typography>
 
+                    <Typography variant="h5" component="h3">
+                        Antal: {product.amount}
+                    </Typography>
 
 
 
