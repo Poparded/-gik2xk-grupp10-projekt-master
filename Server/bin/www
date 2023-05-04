@@ -26,7 +26,14 @@ var server = http.createServer(app);
  */
 const db = require('../models/');
 db.sequelize
+<<<<<<< Updated upstream
   .sync()
+=======
+
+
+  .sync()
+
+>>>>>>> Stashed changes
   .then(() => {
     server.listen(port, () => {
       console.log(`Server running on localhost:${port}`);
