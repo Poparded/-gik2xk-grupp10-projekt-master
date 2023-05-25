@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <Box sx={{ flexGrow: 1 }} className="header">
-        <AppBar position="static" style={{ backgroundColor: '#1E5C5B' }}>
+        <AppBar position="fixed" style={{ backgroundColor: '#1E5C5B' }}>
           <Toolbar>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
               <Link to="/" className="nav-link" style={{ color: '#FFFFFF' }}>Fjällripan</Link>

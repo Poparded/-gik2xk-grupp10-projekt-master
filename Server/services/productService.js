@@ -25,19 +25,6 @@ async function getAll() {
         return createResponseError(error, error.message);
     }
 }
-async function create(cart) {
-
-    try {
-        const newCart = await db.cart.create(cart);
-        //post tags är en array av namn
-        //lägg till eventuella taggar
-        await _addProductToCart(newCart, cart.products);
-
-        return createResponseSuccess(newCart);
-    } catch (error) {
-        return createResponseError(error.status, error.message);
-    }
-}
 
 
 async function addProduct(product) {
@@ -159,7 +146,31 @@ async function update(product, id) {
         return createResponseError(error.status, error.message)
     }
 }
+async function create(cart) {
 
+    try {
+        console.log(cart);
+        const newCart = await db.cart.create(cart);
+
+        await _addProductToCart(newCart, cart.products);
+
+        return createResponseSuccess(newCart);
+    }
+    catch (error) {
+        return createResponseError(error.status, error.message);
+    }
+}
+async function getById(id) {
+    try {
+        const cart = await db.cart.findOne({
+            where: { id },
+            include: [db.user, db.product],
+        });
+        return createResponseSuccess(cart);
+    } catch (error) {
+        return createResponseError(error.status, error.message);
+    }
+}
 
 function _formatProduct(product) {
     const cleanProduct = {
@@ -178,6 +189,8 @@ function _formatProduct(product) {
         amount: product.rating
 
     };
+
+
 
     if (product.ratings) {
         cleanProduct.ratings = [];
@@ -215,4 +228,4 @@ async function _addProductToCart(cart, products) {
         });
     }
 }
-module.exports = { destroy, getAll, getAll, update, addRating, addProduct, getProductById, getRatingByProduct };
+module.exports = { destroy, getAll, getAll, update, addRating, addProduct, getProductById, getRatingByProduct, create, getById };

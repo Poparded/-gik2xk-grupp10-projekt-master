@@ -21,6 +21,7 @@ function Home() {
                 <Box mt={3}>
                     <Typography variant="body1" component="p" align="center">
                         här kan vi länka till produkter.
+
                     </Typography>
                 </Box>
             </Grid>
