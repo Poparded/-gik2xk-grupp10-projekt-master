@@ -160,6 +160,28 @@ async function create(cart) {
         return createResponseError(error.status, error.message);
     }
 }
+async function updateCart(id, cart) {
+
+    //Denna behöver en cart och ett ID, cart ID
+
+    try {
+        const existingCart = await db.cart.findOne({ where: { id } });
+        if (!existingCart) {
+            return createResponseError(404, "Found no cart to update.");
+        }
+
+        await _addProductToCart(existingCart, cart.products);
+
+        await db.cart.update(cart, { where: { id } }); //funkar inte dubbelkolla detta
+
+
+        return createResponseMessage(200, "Cart has been updated.");
+    } catch (error) {
+        return createResponseError(error.status, error.message);
+    }
+}
+
+
 async function getById(id) {
     try {
         const cart = await db.cart.findOne({
@@ -228,4 +250,4 @@ async function _addProductToCart(cart, products) {
         });
     }
 }
-module.exports = { destroy, getAll, getAll, update, addRating, addProduct, getProductById, getRatingByProduct, create, getById };
+module.exports = { destroy, getAll, getAll, update, addRating, addProduct, getProductById, getRatingByProduct, create, getById, updateCart };

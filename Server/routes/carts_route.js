@@ -20,5 +20,28 @@ router.post("/", (req, res) => {
 
 
 
+//Skicka vidare cartID  och cart dvs den NYA cart vi har 1! produkt i för att sparas in i en existerande cart...
+router.put("/:id", (req, res) => {
+    const id = req.params.id;
+    const cart = req.body
+    productServices.updateCart(id, cart).then((result) => {
+        res.json(result.data);
+    });
+
+});
+
+
+
+//check
+router.delete("/:id", (req, res) => {
+    const id = req.params.id
+    db.cart.destroy({ where: { id } }).then((result) => {
+        res.json(`cart raderades`);
+    });
+});
+
+
+
+
 
 module.exports = router;
