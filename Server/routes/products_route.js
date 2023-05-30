@@ -28,7 +28,7 @@ router.get("/:id", (req, res) => {
 router.post('/new', (req, res) => {
   const product = req.body; // Get post data from the request body
   console.log(product);
-  productService.addProduct(product).then((result) => { // Call postService.create method with post as parameter
+  productService.create(product).then((result) => { // Call postService.create method with post as parameter
     res.status(result.status).json(result.data); // Send the response with the status and data received from postService.create
   });
 });

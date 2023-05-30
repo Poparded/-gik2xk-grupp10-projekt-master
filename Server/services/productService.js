@@ -27,11 +27,11 @@ async function getAll() {
 }
 
 
-async function addProduct(product) {
-    const invalidData = validate(product, constraints_products);
-    if (invalidData) {
-        return createResponseError(422, invalidData);
-    }
+async function create(product) {
+    //const invalidData = validate(product, constraints_products);
+    /* if (invalidData) {
+         return createResponseError(422, invalidData);
+     }*/
     try {
         const newPost = await db.product.create(product);
 
@@ -146,6 +146,7 @@ async function update(product, id) {
         return createResponseError(error.status, error.message)
     }
 }
+
 async function create(cart) {
 
     try {
@@ -161,9 +162,6 @@ async function create(cart) {
     }
 }
 async function updateCart(id, cart) {
-
-    //Denna behöver en cart och ett ID, cart ID
-
     try {
         const existingCart = await db.cart.findOne({ where: { id } });
         if (!existingCart) {
@@ -172,15 +170,13 @@ async function updateCart(id, cart) {
 
         await _addProductToCart(existingCart, cart.products);
 
-        await db.cart.update(cart, { where: { id } }); //funkar inte dubbelkolla detta
-
+        await db.cart.update(cart, { where: { id } });
 
         return createResponseMessage(200, "Cart has been updated.");
     } catch (error) {
         return createResponseError(error.status, error.message);
     }
 }
-
 
 async function getById(id) {
     try {
@@ -193,7 +189,22 @@ async function getById(id) {
         return createResponseError(error.status, error.message);
     }
 }
+async function destroyCart(id) {
+    if (!id) return createResponseError(422, "Id is required");
 
+    try {
+        await db.cart.destroy({
+            where: {
+                id: id
+            }
+        })
+        await db.product.destroy({ where: { id } });
+
+        return createResponseMessage(200, "Product deleted");
+    } catch (error) {
+        return createResponseError(error.status, error.message);
+    }
+}
 function _formatProduct(product) {
     const cleanProduct = {
         id: product.id,
@@ -208,11 +219,8 @@ function _formatProduct(product) {
         user_id: product.rating,
         amount: product.rating,
         imageUrl: product.imageUrl,
-        amount: product.rating
-
+        amount: product.rating,
     };
-
-
 
     if (product.ratings) {
         cleanProduct.ratings = [];
@@ -232,22 +240,18 @@ function _formatProduct(product) {
     return cleanProduct;
 }
 
-async function _findOrCreateproductId(name) {
-    name = name.toLowerCase().trim();
+async function _findOrCreateProductId(id) {
     const foundOrCreatedProduct = await db.product.findOrCreate({ where: { id } });
-
+    console.log(foundOrCreatedProduct);
     return foundOrCreatedProduct[0].id;
 }
 
 async function _addProductToCart(cart, products) {
-
-
-
     if (products) {
-        products.forEach(async (product) => {
-            const productId = await _findOrCreateproductId(product.id);
+        for (const product of products) {
+            const productId = await _findOrCreateProductId(product.id);
             await cart.addProduct(productId);
-        });
+        }
     }
 }
-module.exports = { destroy, getAll, getAll, update, addRating, addProduct, getProductById, getRatingByProduct, create, getById, updateCart };
+module.exports = { destroy, getAll, getAll, update, addRating, getProductById, getRatingByProduct, create, getById, updateCart, destroyCart };

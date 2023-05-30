@@ -24,6 +24,7 @@ router.post("/", (req, res) => {
 router.put("/:id", (req, res) => {
     const id = req.params.id;
     const cart = req.body
+    console.log(cart);
     productServices.updateCart(id, cart).then((result) => {
         res.json(result.data);
     });
