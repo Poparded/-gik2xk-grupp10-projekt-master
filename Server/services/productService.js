@@ -17,6 +17,28 @@ const constraints_products = {
     },
 };
 
+
+const constraints_Cart = {
+    title: {
+        length: {
+            minimum: 2,
+            maximum: 100,
+            tooShort: "^Titeln måste vara minst %{count} tecken lång.",
+            tooLong: "^Titeln får inte vara längre än %{count} tecken lång.",
+        },
+    },
+    user_id: {
+        length: {
+            minimum: 2,
+            maximum: 100,
+            tooShort: "^Titeln måste vara minst %{count} tecken lång.",
+            tooLong: "^Titeln får inte vara längre än %{count} tecken lång.",
+        },
+    },
+};
+
+
+async
 async function getAll() {
     try {
         const AllProducts = await db.product.findAll();
@@ -135,6 +157,7 @@ async function update(product, id) {
         return createResponseError(422, invalidData)
     }
     try {
+        console.log(product);
         const existingProduct = await db.product.findOne({ where: { id } })
         if (!existingProduct) {
             return createResponseError(404, "No product found to update")
@@ -146,14 +169,36 @@ async function update(product, id) {
         return createResponseError(error.status, error.message)
     }
 }
+async function getCartbyID(id) {
+    if (!id) {
+        return createResponseError(422, "Id is required");
+    }
+    try {
+        const cart = await db.cart.findOne({
+            where: { id },
+            include: [db.user, db.product],
+        });
+
+        // Add the newly created rating to the productWithRating object
+        return createResponseSuccess(cart);
+    } catch (error) {
+        return createResponseError(error.status, error.message);
+    }
+}
 
 async function create(cart) {
+    const invalidData = validate(cart, constraints_products)
+    if (invalidData) {
+        return createResponseError(422, invalidData);
+
+    }
 
     try {
+
         console.log(cart);
         const newCart = await db.cart.create(cart);
 
-        await _addProductToCart(newCart, cart.products);
+
 
         return createResponseSuccess(newCart);
     }
@@ -167,9 +212,9 @@ async function updateCart(id, cart) {
         if (!existingCart) {
             return createResponseError(404, "Found no cart to update.");
         }
+        console.log(cart);
 
         await _addProductToCart(existingCart, cart.products);
-
         await db.cart.update(cart, { where: { id } });
 
         return createResponseMessage(200, "Cart has been updated.");
@@ -178,10 +223,13 @@ async function updateCart(id, cart) {
     }
 }
 
-async function getById(id) {
+async function getCartbyuserid(id) {
     try {
+        console.log(id);
         const cart = await db.cart.findOne({
-            where: { id },
+            where: {
+                user_id: id
+            },
             include: [db.user, db.product],
         });
         return createResponseSuccess(cart);
@@ -254,4 +302,4 @@ async function _addProductToCart(cart, products) {
         }
     }
 }
-module.exports = { destroy, getAll, getAll, update, addRating, getProductById, getRatingByProduct, create, getById, updateCart, destroyCart };
+module.exports = { destroy, getAll, getAll, update, addRating, getProductById, getRatingByProduct, create, updateCart, destroyCart, getCartbyuserid, getCartbyID };

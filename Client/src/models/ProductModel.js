@@ -46,6 +46,7 @@ export async function update(product) {
 }
 
 export async function create(product) {
+    console.log(product);
     const result = await api.post('/products/new', product);
 
     if (result.status === 200) return result.data;

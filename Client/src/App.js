@@ -6,6 +6,7 @@ import Products from './views/Products';
 import ProductsEdit from './views/ProductsEdit';
 import ProductsDetail from './views/ProductsDetail';
 import ProductCreate from './views/ProductCreate';
+import Cart from './views/CartMain';
 
 import Users from './views/Users';
 import UserRating from "./views/UserRating"
@@ -27,6 +28,9 @@ function App() {
             <Typography variant="h6" component="div">
               <Link to="/userList" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Visa alla användare</Link>
             </Typography>
+            <Typography variant="h6" component="div">
+              <Link to="/Cart" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Visa cart</Link>
+            </Typography>
           </Toolbar>
         </AppBar>
       </Box>
@@ -37,6 +41,8 @@ function App() {
           <Route path="/products" element={<Products></Products>}></Route>
           <Route path="/productsEdit/:id" element={<ProductsEdit></ProductsEdit>}></Route>
           <Route path="/productCreate" element={<ProductCreate></ProductCreate>}></Route>
+          <Route path="/productCreate" element={<ProductCreate></ProductCreate>}></Route>
+          <Route path="/cart" element={<Cart></Cart>}></Route>
 
           <Route path="/products/large/:id" element={<ProductsDetail></ProductsDetail>}></Route>
           <Route path="/userList" element={<Users></Users>}></Route>

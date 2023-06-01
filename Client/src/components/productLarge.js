@@ -1,9 +1,34 @@
 import { Typography, Button, Box } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { updateCart } from "../models/CartModel";
+
 import TextField from "@mui/material/TextField";
 
-function productLarge({ product }, { rating }) {
+
+function ProductLarge({ product }, { rating }) {
+
+    const [alertOpen, setAlertOpen] = useState(false);
+    const [cart, setCart] = useState({ units: (0), userId: (1), products: ([]), });
+
+    const [products, setProduct] = useState({ units: (0) });
+
+    const cartId = 8
+
+
+
+    let prodUnits = 0;
+
+
+
+
+
+    function onUpdate() {
+
+        cart.products.push(product);
+        updateCart(cart, cartId).then(() => { console.log(cart); setAlertOpen(true) });
+    }
+
     return (<>
         <ul>
             <li key={`productId_${product.id}`}>
@@ -36,7 +61,16 @@ function productLarge({ product }, { rating }) {
 
 
                     <Box variant="h5" component="h3">
-                        <Button>Add to cart</Button>
+                        <Button
+                            size="large"
+                            onClick={() => onUpdate({ ...cart })}
+                            variant="contained"
+                            color="primary"
+
+
+                        >
+                            Add to cart
+                        </Button>
                     </Box>
                 </div>
             </li>
@@ -46,4 +80,4 @@ function productLarge({ product }, { rating }) {
         </Typography>
     </>)
 }
-export default productLarge;
+export default ProductLarge;

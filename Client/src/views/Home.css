@@ -1,11 +1,58 @@
-.Home_grid-item {
-  border: 1px solid black;
-  padding: 3px;
-  background-color: hsl(177, 100%, 50%);
-}
 .home-container {
-  text-decoration: wavy;
-  padding: 10px;
-  color: aqua;
-  background-color: black;
+  background-color: #23262d;
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #a9b1aa;
+}
+
+.wavy-text {
+  font-family: "Pacifico", cursive;
+  color: #3c7749;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: #29ee53;
+  text-decoration: underline;
+}
+#toolbar {
+  position: fixed;
+  top: 10%;
+  left: 0;
+
+  width: 455px; /* Adjust the width and height to desired size */
+  height: 455px;
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  z-index: 9999;
+}
+
+#message {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  opacity: 1;
+}
+
+#message-icon {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+/* Example icon styling */
+#message-icon::before {
+  content: "📢";
+}
+
+#description {
+  margin: 0;
 }
