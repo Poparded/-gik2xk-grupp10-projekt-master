@@ -42,14 +42,20 @@ router.put("/:id", (req, res) => {
 
 
 //check
-router.delete("/:id", (req, res) => {
+/*router.delete("/:id", (req, res) => {
     const id = req.params.id
     db.cart.destroy({ where: { id } }).then((result) => {
         res.json(`cart raderades`);
     });
+});*/
+
+router.delete("/:id", (req, res) => {
+    const productId = req.params.id;
+    db.cart.destroy({ where: { productId } }).then((result) => {
+        res.json(`product raderades`);
+    });
+
 });
-
-
 
 
 

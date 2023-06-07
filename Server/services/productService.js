@@ -55,8 +55,9 @@ async function create(product) {
          return createResponseError(422, invalidData);
      }*/
     try {
+        console.log(product);
         const newPost = await db.product.create(product);
-
+        console.log(newPost);
         return createResponseSuccess(newPost);
     } catch (error) {
         return createResponseError(error.status, error.message);

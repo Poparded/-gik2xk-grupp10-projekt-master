@@ -13,7 +13,7 @@ function ProductEdit() {
     const { id: productId } = useParams();
     const navigate = useNavigate();
 
-    const [setAlertOpen] = useState(false);
+    const [alertOpen, setAlertOpen] = useState(false);
     const emptyProduct = {
         id: 0,
         title: "",
@@ -66,15 +66,15 @@ function ProductEdit() {
                 onChange={handleChange}
             />
             <TextField
-                name="pris"
-                label="Pris"
+                name="price"
+                label="Price"
                 value={product.price}
                 fullWidth
                 onChange={handleChange}
             />
             <TextField
                 name="imageUrl"
-                label="Produkt Image URL"
+                label="Product Image URL"
                 value={product.imageUrl}
                 fullWidth
                 onChange={handleChange}

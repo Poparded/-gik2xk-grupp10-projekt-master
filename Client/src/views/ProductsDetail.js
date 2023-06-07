@@ -5,27 +5,27 @@ import { Link, useParams } from 'react-router-dom';
 import ProductLarge from '../components/productLarge';
 import DisplayRating from '../components/DisplayRating';
 import { getOneWithRating } from '../models/ProductModel';
-import RatingForm from "../components/RatingForm";
+import RatingForm from '../components/RatingForm';
 
 function ProductsDetail() {
     const params = useParams();
     const productId = params.id;
     const [product, setProduct] = useState({});
-    console.log(productId);
+    const [ratings, setRatings] = useState([]);
 
     useEffect(() => {
-        getOneWithRating(productId).then((product) => setProduct(product));
+        getOneWithRating(productId).then((product) => {
+            setProduct(product);
+            setRatings(product.ratings); // Assuming ratings are returned as an array in product object
+        });
     }, [productId]);
 
-    console.log(product);
-
-    const ratings = product.ratings || [];
-    const total = ratings.reduce((acc, rating) => acc + rating.rating, 0);
-
-    console.log(total);
-
-    const averageRating = ratings.length > 0 ? total / ratings.length : 0;
-
+    // Calculate average rating
+    const averageRating =
+        ratings.length > 0
+            ? ratings.reduce((sum, rating) => sum + rating.rating, 0) / ratings.length
+            : 0;
+    console.log(averageRating);
     return (
         <>
             <ProductLarge product={product} />
@@ -39,10 +39,9 @@ function ProductsDetail() {
                         </Box>
                         {averageRating > 0 && (
                             <Box>
-                                <Typography>{averageRating.toFixed(1)}</Typography>
+                                <Typography>{"Average Rating is :" + averageRating.toFixed(1)}</Typography>
                             </Box>
                         )}
-
                     </Grid>
                 </Grid>
             </div>
@@ -50,7 +49,6 @@ function ProductsDetail() {
             <Link to={`/product/${productId}/edit`}>
                 <Button variant="contained">Ändra</Button>
             </Link>
-
         </>
     );
 }

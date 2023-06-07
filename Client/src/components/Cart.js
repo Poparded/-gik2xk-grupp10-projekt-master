@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import { useEffect, useState } from 'react';
 import { getCartByUserId } from '../models/CartModel';
 
@@ -15,34 +15,55 @@ function Cart() {
         fetchCart();
     }, []);
 
+
+    console.log(cart);
     useEffect(() => {
-        let amount = 0;
         if (cart.products) {
-            amount = cart.products.reduce((total, product) => {
-                return total + product.price * product.units;
-            }, 0);
+            let totalPrice = 0;
+            cart.products.forEach((product) => {
+                totalPrice += product.price * product.amount;
+            });
+            setTotalAmount(totalPrice);
         }
-        setTotalAmount(amount);
-    }, [cart.products]);
+    }, [cart]);
+
+    const removeProduct = (productId) => {
+        const updatedCart = { ...cart };
+        const productIndex = updatedCart.products.findIndex(
+            (product) => product.id === productId
+        );
+
+        if (productIndex !== -1) {
+            updatedCart.products.splice(productIndex, 1);
+            setCart(updatedCart);
+        }
+    };
 
     return (
         <Box border={1} borderColor="grey.300" p={2}>
             <Typography variant="h6">Shopping Cart</Typography>
             <ul>
-                {cart.products && cart.products.map((product) => (
-                    <li key={`productId_${product.id}`}>
-
-                        <Typography variant="subtitle1" gutterBottom>
-                            Title: {product.title}
-                        </Typography>
-                        <Typography variant="body2" gutterBottom>
-                            Units: {product.units}
-                        </Typography>
-                        <Typography variant="body2" gutterBottom>
-                            Price: {product.price} kr
-                        </Typography>
-                    </li>
-                ))}
+                {cart.products &&
+                    cart.products.map((product) => (
+                        <li key={`productId_${product.id}`}>
+                            <Typography variant="subtitle1" gutterBottom>
+                                Title: {product.title}
+                            </Typography>
+                            <Typography variant="body2" gutterBottom>
+                                Units: {product.amount}
+                            </Typography>
+                            <Typography variant="body2" gutterBottom>
+                                Price: {product.price} kr
+                            </Typography>
+                            <Button
+                                variant="outlined"
+                                color="secondary"
+                                onClick={() => removeProduct(product.id)}
+                            >
+                                Remove
+                            </Button>
+                        </li>
+                    ))}
             </ul>
             <Typography variant="subtitle1">Total Price: {totalAmount} kr</Typography>
         </Box>
