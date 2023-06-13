@@ -6,8 +6,7 @@ function Products() {
         <Grid container justifyContent="center" alignItems="center">
             <Grid item xs={12} md={8}>
                 <Typography variant="h4" component="h2" align="center" color="primary" gutterBottom>
-                    All Products
-                </Typography>
+                    Alla produkter                </Typography>
                 <ProductList />
             </Grid>
         </Grid>

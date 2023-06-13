@@ -1,81 +1,81 @@
-// Import the Express library and create a router instance
+// Importera Express-biblioteket och skapa en instans av en router
 const router = require('express').Router();
 
-// Import a database model
+// Importera en databasmodell
 const db = require('../models');
 
-// Import the `validate.js` library for input validation
+// Importera biblioteket validate.js för validering av inmatning
 const validate = require('validate.js');
 
-// Import a user service module
+// Importera en användartjänstmodul
 const userService = require("../services/userService");
 
-// Import the `JSON` object from the `sequelize` library
+// Importera objektet JSON från biblioteket sequelize
 const { JSON } = require('sequelize');
 
-// Define a route handler for GET requests to the root path
+// Definiera en routefunktion för GET-förfrågningar till rotvägen
 router.get('/', (req, res) => {
-  // Call a method to get all users from the user service
-  console.log("Getting users");
+  // Anropa en metod för att hämta alla användare från användartjänsten
+  console.log("Hämtar användare");
   userService.getAllusers().then((result) => {
-    // Send the response with the status code and data from the user service
+    // Skicka svar med status och data från användartjänsten
     res.status(result.status).json(result.data);
   }).catch((error) => {
-    // Send an error response with the error message and status code
+    // Skicka ett felmeddelande med felmeddelandet och statuskoden
     res.status(error.status).json({ error: error.message });
   });
 });
 
-// Define a route handler for POST requests to the root path
+// Definiera en routefunktion för POST-förfrågningar till rotvägen
 router.post('/', (req, res) => {
-  // Get the user object from the request body
-  const user = req.body
-
-  // Call a method to add the user to the user service
-  userService.addUsers(user).then((result) => {
-    // Send the response with the status code and data from the user service
-    res.status(result.status).json(result.data);
-  })
-});
-
-// Define a route handler for DELETE requests to the root path
-router.delete('/', (req, res) => {
-  // Get the user ID from the request body
-  const id = req.body.id
-
-  // Call a method to delete the user from the user service
-  userService.destroy(id).then((result) => {
-    // Send the response with the status code and data from the user service
-    res.status(result.status).json(result.data);
-  })
-});
-
-// Define a route handler for PUT requests to the root path
-router.put("/", (req, res) => {
-  // Get the user ID and user object from the request body
-  const id = req.body.id
+  // Hämta användarobjektet från förfrågningens kropp
   const user = req.body;
 
-  // Call a method to update the user in the user service
-  userService.update(user, id).then((result) => {
-    // Send the response with the status code and data from the user service
-    res.status(result.status).json(result.data)
-  })
-});
-
-// Define a route handler for GET requests to the review path with an ID parameter
-router.get("/rating/:id", (req, res) => {
-  // Get the ID parameter from the request URL
-  const id = req.params.id;
-  console.log(id);
-  console.log("getting rating by user");
-  // Call a method to get the review by ID from a product service
-  userService.getRatingByUser(id).then((result) => {
-    console.log(result.data);
-    // Send the response with the status code and data from the product service
+  // Anropa en metod för att lägga till användaren i användartjänsten
+  userService.addUsers(user).then((result) => {
+    // Skicka svar med status och data från användartjänsten
     res.status(result.status).json(result.data);
   });
 });
 
-// Export the router to make it available to other modules
+// Definiera en routefunktion för DELETE-förfrågningar till rotvägen
+router.delete('/', (req, res) => {
+  // Hämta användar-ID från förfrågningens kropp
+  const id = req.body.id;
+
+  // Anropa en metod för att ta bort användaren från användartjänsten
+  userService.destroy(id).then((result) => {
+    // Skicka svar med status och data från användartjänsten
+    res.status(result.status).json(result.data);
+  });
+});
+
+// Definiera en routefunktion för PUT-förfrågningar till rotvägen
+router.put("/", (req, res) => {
+  // Hämta användar-ID och användarobjektet från förfrågningens kropp
+  const id = req.body.id;
+  const user = req.body;
+
+  // Anropa en metod för att uppdatera användaren i användartjänsten
+  userService.update(user, id).then((result) => {
+    // Skicka svar med status och data från användartjänsten
+    res.status(result.status).json(result.data);
+  });
+});
+
+// Definiera en routefunktion för GET-förfrågningar till vägen med betyg med ett ID-parametrar
+router.get("/rating/:id", (req, res) => {
+  // Hämta ID-parametern från förfrågningens URL
+  const id = req.params.id;
+  console.log(id);
+  console.log("Hämtar betyg från användare");
+  // Anropa en metod för att hämta betyget med ID från en användartjänst
+  userService.getRatingByUser(id).then((result) => {
+    console.log(result.data);
+    // Skicka svar med status och data från användartjänsten
+    res.status(result.status).json(result.data);
+  });
+});
+
+// Exportera routern för att göra den tillgänglig för andra moduler
 module.exports = router;

@@ -1,6 +1,6 @@
 import { Button, TextField } from "@mui/material"; // Importing Button and TextField components from the Material-UI library
-import { useNavigate, useParams } from "react-router-dom"; // Importing the useNavigate and useParams hooks from the react-router-dom library
-import { useEffect, useState } from "react"; // Importing the useEffect and useState hooks from the React library
+import { useNavigate, } from "react-router-dom"; // Importing the useNavigate and useParams hooks from the react-router-dom library
+import { useState } from "react"; // Importing the useEffect and useState hooks from the React library
 import { create } from "../models/ProductModel"; // Importing the create function from the ProductModel module
 
 function ProductCreate() { // Defining a React functional component named ProductEdit

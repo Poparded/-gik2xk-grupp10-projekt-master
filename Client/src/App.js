@@ -20,7 +20,7 @@ function App() {
               <Link to="/" className="nav-link" style={{ color: '#FFFFFF' }}>Fjällripan</Link>
             </Typography>
             <Typography variant="h6" component="div">
-              <Link to="/products" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Alla Produkten</Link>
+              <Link to="/products" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Alla Produkter</Link>
             </Typography>
             <Typography variant="h6" component="div">
               <Link to="/productCreate" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Skapa produkt</Link>
@@ -29,7 +29,7 @@ function App() {
               <Link to="/userList" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Visa alla användare</Link>
             </Typography>
             <Typography variant="h6" component="div">
-              <Link to="/Cart" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Visa cart</Link>
+              <Link to="/Cart" className="nav-link" style={{ color: '#FFFFFF', marginLeft: 30 }}>Visa varukorgen</Link>
             </Typography>
           </Toolbar>
         </AppBar>

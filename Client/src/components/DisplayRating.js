@@ -1,35 +1,32 @@
-import { Typography, } from "@mui/material";
-
-
-
+import { Typography, Box, Container } from "@mui/material";
 
 function DisplayRating({ rating }) {
+    return (
+        <Container sx={{ backgroundColor: "#f5f5f5", padding: "16px" }}>
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
+                <Typography variant="subtitle1" sx={{ marginBottom: "8px" }}>
+                    Titel: {rating.title}
+                </Typography>
 
 
-    return (<>
-        <ul>
-            <li key={`productId_${rating.id}`}>
+                <Typography variant="body1" sx={{ marginBottom: "4px" }}>
+                    Användar-id: {rating.userId}
+                </Typography>
 
+                <Typography variant="body1" sx={{ marginBottom: "4px" }}>
+                    Betyg: {rating.rating}
+                </Typography>
 
-                <div>
-                    <Typography variant="h5" component="h3">
-                        {`productId_${rating.id}`}
-                    </Typography>
-                    <Typography> {`rating ${rating.title}`}</Typography>
-                    <br />
-                    <Typography variant="h5" component="h3">
-                        {`rating:  ${rating.rating}`}</Typography>
+                <Typography variant="body1" sx={{ marginBottom: "4px" }}>
+                    Produkt-id: {rating.productId}
+                </Typography>
 
-
-
-
-
-
-
-                </div>
-            </li>
-        </ul>
-
-    </>)
+                <Typography variant="body1" sx={{ marginBottom: "4px" }}>
+                    Skapat vid: {rating.createdAt}
+                </Typography>
+            </Box>
+        </Container>
+    );
 }
+
 export default DisplayRating;

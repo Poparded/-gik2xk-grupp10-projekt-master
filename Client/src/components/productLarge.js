@@ -3,21 +3,21 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { updateCart } from "../models/CartModel";
 
-import TextField from "@mui/material/TextField";
+
 
 
 function ProductLarge({ product }, { rating }) {
 
-    const [alertOpen, setAlertOpen] = useState(false);
-    const [cart, setCart] = useState({ units: (0), userId: (1), products: ([]), });
-
-    const [products, setProduct] = useState({ units: (0) });
-
-    const cartId = 8
+    const [setAlertOpen] = useState(false);
+    const [cart,] = useState({ units: (0), userId: (1), products: ([]), });
 
 
 
-    let prodUnits = 0;
+    const cartId = 6
+
+
+
+
 
 
 
@@ -69,14 +69,14 @@ function ProductLarge({ product }, { rating }) {
 
 
                         >
-                            Add to cart
+                            Lägg till på varukorgen
                         </Button>
                     </Box>
                 </div>
             </li>
         </ul>
         <Typography variant="h5" component="h3">
-            {<Link to={`/productsEdit/${product.id}`}> {"Edit product"} </Link>}
+            {<Link to={`/productsEdit/${product.id}`}> {"Redigera produkt"} </Link>}
         </Typography>
     </>)
 }

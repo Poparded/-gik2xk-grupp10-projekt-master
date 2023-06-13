@@ -25,7 +25,6 @@ function ProductsDetail() {
         ratings.length > 0
             ? ratings.reduce((sum, rating) => sum + rating.rating, 0) / ratings.length
             : 0;
-    console.log(averageRating);
     return (
         <>
             <ProductLarge product={product} />
@@ -39,7 +38,7 @@ function ProductsDetail() {
                         </Box>
                         {averageRating > 0 && (
                             <Box>
-                                <Typography>{"Average Rating is :" + averageRating.toFixed(1)}</Typography>
+                                <Typography>{"Medelbetyg är :" + averageRating.toFixed(1)}</Typography>
                             </Box>
                         )}
                     </Grid>

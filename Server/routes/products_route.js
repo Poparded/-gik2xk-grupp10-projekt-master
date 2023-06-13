@@ -1,114 +1,76 @@
-const productService = require("../services/productService");
-const router = require("express").Router();
-const db = require("../models");
-const validate = require("validate.js");
+const productService = require("../services/productService"); // Importera produktjänsten
+const router = require("express").Router(); // Skapa en router-instans med Express
+const db = require("../models"); // Importera databasmodeller
+const validate = require("validate.js"); // Importera validate.js
 
-
-
-router.get("/", (req, res) => {
-  console.log("Getting products");
+router.get("/", (req, res) => { // GET-förfrågan för att hämta alla produkter
+  console.log("Hämtar produkter");
   productService.getAll().then((result) => {
     console.log(result);
-    res.status(result.status).json(result.data);
+    res.status(result.status).json(result.data); // Skicka svar med status och data
   }).catch((error) => {
-    res.status(500).json(error);
+    res.status(500).json(error); // Skicka felmeddelande med status 500
   });
 });
 
-router.get("/:id", (req, res) => {
-  id = req.params.id
+router.get("/:id", (req, res) => { // GET-förfrågan för en specifik produkt med ID
+  id = req.params.id;
 
   productService.getProductById(id).then((result) => {
-    res.status(result.status).json(result.data)
+    res.status(result.status).json(result.data); // Skicka svar med status och data
   }).catch((error) => {
-    res.status(500).json(error)
-  })
-})
-// Product request to create a new post
-router.post('/new', (req, res) => {
-  const product = req.body; // Get post data from the request body
-  productService.create(product).then((result) => { // Call postService.create method with post as parameter
-    res.status(result.status).json(result.data); // Send the response with the status and data received from postService.create
+    res.status(500).json(error); // Skicka felmeddelande med status 500
   });
 });
 
-router.post('/:id/addRating', (req, res) => {
-  const rating = req.body; // Get post data from the request body
-  const id = req.params.id
-
-  productService.addRating(id, rating).then((result) => { // Call postService.create method with post as parameter
-    res.status(result.status).json(result.data); // Send the response with the status and data received from postService.create
+router.post('/new', (req, res) => { // POST-förfrågan för att skapa en ny produkt
+  const product = req.body; // Hämta produktdata från förfrågningens kropp
+  productService.createProduct(product).then((result) => { // Anropa createProduct-metoden i produktjänsten med produkten som parameter
+    res.status(result.status).json(result.data); // Skicka svar med status och data från produktjänsten
   });
 });
 
-
-
-router.delete('/', (req, res) => {
-
-  const id = req.body.id
-  console.log("deleting product");
-  console.log(req);
-  productService.destroy(id).then((result) => { // Call postService.destroy method with id as parameter
-    res.status(result.status).json(result.data); // Send the response with the status and data received from postService.destroy
-  });
-});
-
-router.get("/rating/:id", (req, res) => {
-  // Get the ID parameter from the request URL
+router.post('/:id/addRating', (req, res) => { // POST-förfrågan för att lägga till betyg på en produkt
+  const rating = req.body; // Hämta betygsdata från förfrågningens kropp
   const id = req.params.id;
-  console.log("Getting rating");
 
-  // Call a method to get the review by ID from a product service
-  productService.getRatingByProduct(id).then((result) => {
-    // Send the response with the status code and data from the product service
-    console.log(result);
-    res.status(result.status).json(result.data);
+  productService.addRating(id, rating).then((result) => { // Anropa addRating-metoden i produktjänsten med ID och betyg som parameter
+    res.status(result.status).json(result.data); // Skicka svar med status och data från produktjänsten
   });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete('/', (req, res) => { // DELETE-förfrågan för att ta bort en produkt
+  const id = req.body.id;
+  console.log("Tar bort produkt");
+  console.log(req);
+  productService.destroy(id).then((result) => { // Anropa destroy-metoden i produktjänsten med ID som parameter
+    res.status(result.status).json(result.data); // Skicka svar med status och data från produktjänsten
+  });
+});
+
+router.get("/rating/:id", (req, res) => { // GET-förfrågan för att hämta betyg för en produkt
+  const id = req.params.id; // Hämta ID-parametern från URL:en
+  console.log("Hämtar betyg");
+
+  productService.getRatingByProduct(id).then((result) => { // Anropa getRatingByProduct-metoden i produktjänsten med ID som parameter
+    console.log(result);
+    res.status(result.status).json(result.data); // Skicka svar med status och data från produktjänsten
+  });
+});
+
+router.delete("/:id", (req, res) => { // DELETE-förfrågan för att ta bort en produkt med ett specifikt ID
   const productId = req.params.id;
 
   // Implementera koden för att ta bort produkten med det angivna productId från korgen
   // och returnera lämplig respons till klienten
 });
 
-
-/*router.post("/:id/addRating", (req, res) => {
-  const rating = req.body.rating;
-  if (rating) {
-    db.product
-      .findByPk(req.params.id)
-      .then((product) => {
-        if (!product) {
-          res
-            .status(404)
-            .json({
-              error: `Produkten med ID ${req.params.id} kunde inte hittas`,
-            });
-        } else {
-          const rating = req.body.rating;
-          product.update({ rating: rating }).then(() => {
-            res.json(
-              `Betyget för produkten med ID ${req.params.id} uppdaterades till ${rating}`
-            );
-          });
-        }
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  } else {
-    console.log(nop);
-  }
-});*/
-
-router.put("/", (req, res) => {
-  const id = req.body.id
+router.put("/", (req, res) => { // PUT-förfrågan för att uppdatera en produkt
+  const id = req.body.id;
   const produkt = req.body;
-  productService.update(produkt, id).then((result) => {
-    res.status(result.status).json(result.data)
-  })
+  productService.update(produkt, id).then((result) => { // Anropa update-metoden i produktjänsten med produkt och ID som parameter
+    res.status(result.status).json(result.data); // Skicka svar med status och data från produktjänsten
+  });
 });
 
-module.exports = router;
+module.exports = router; // Exportera routern för användning i andra filer

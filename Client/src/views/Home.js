@@ -32,7 +32,7 @@ function Home() {
                 <div id="message">
                     <span id="message-icon">📢</span>
                     <Typography variant="body1" component="p" id="description">
-                        Välkommen till "Fjäll ripan" – din ultimata webbplats för vandring och fjälläventyr! Vi har allt du behöver för att erövra topparna och utforska dalgångarna. Från vandringsskor till ryggsäckar och kläder – vår samling är sagolik! Dessutom erbjuder vi praktiska tillbehör för att göra dina äventyr roliga och säkra. Tveka inte, utforska vår hemsida och bli inspirerad. Välkommen till "Fjäll ripan" där fjällen blir magi och äventyr!
+                        Välkommen till "Fjällripan" – din ultimata webbplats för vandring och fjälläventyr! Vi har allt du behöver för att erövra topparna och utforska dalgångarna. Från vandringsskor till ryggsäckar och kläder – vår samling är sagolik! Dessutom erbjuder vi praktiska tillbehör för att göra dina äventyr roliga och säkra. Tveka inte, utforska vår hemsida och bli inspirerad. Välkommen till "Fjäll ripan" där fjällen blir magi och äventyr!
                     </Typography>
                 </div>
             </div>

@@ -27,7 +27,7 @@ const constraints_Cart = {
             tooLong: "^Titeln får inte vara längre än %{count} tecken lång.",
         },
     },
-    user_id: {
+    userId: {
         length: {
             minimum: 2,
             maximum: 100,
@@ -38,7 +38,7 @@ const constraints_Cart = {
 };
 
 
-async
+
 async function getAll() {
     try {
         const AllProducts = await db.product.findAll();
@@ -49,11 +49,11 @@ async function getAll() {
 }
 
 
-async function create(product) {
-    //const invalidData = validate(product, constraints_products);
-    /* if (invalidData) {
-         return createResponseError(422, invalidData);
-     }*/
+async function createProduct(product) {
+    const invalidData = validate(product, constraints_products);
+    if (invalidData) {
+        return createResponseError(422, invalidData);
+    }
     try {
         console.log(product);
         const newPost = await db.product.create(product);
@@ -188,7 +188,7 @@ async function getCartbyID(id) {
 }
 
 async function create(cart) {
-    const invalidData = validate(cart, constraints_products)
+    const invalidData = validate(cart, constraints_Cart)
     if (invalidData) {
         return createResponseError(422, invalidData);
 
@@ -303,4 +303,4 @@ async function _addProductToCart(cart, products) {
         }
     }
 }
-module.exports = { destroy, getAll, getAll, update, addRating, getProductById, getRatingByProduct, create, updateCart, destroyCart, getCartbyuserid, getCartbyID };
+module.exports = { destroy, getAll, getAll, update, addRating, getProductById, getRatingByProduct, create, updateCart, destroyCart, getCartbyuserid, getCartbyID, createProduct };

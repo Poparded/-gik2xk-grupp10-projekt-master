@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+
       },
       units: {
         type: DataTypes.INTEGER,
@@ -14,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
       amount: {
         type: DataTypes.DOUBLE,
         allowNull: false,
-      }
+      },
+
 
     },
     { underscored: true }
